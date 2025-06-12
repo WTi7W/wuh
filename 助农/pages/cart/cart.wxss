@@ -1,0 +1,278 @@
+.container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding-bottom: 120rpx;
+}
+
+/* 购物车头部 */
+.cart-header {
+  background: white;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.cart-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.cart-count {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 购物车列表 */
+.cart-list {
+  padding: 20rpx;
+}
+
+.cart-item {
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: 30rpx 20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+}
+
+/* 圆形复选框 */
+.checkbox-container {
+  margin-right: 20rpx;
+}
+
+.checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.checkbox.checked {
+  border-color: #3cc51f;
+  background: #3cc51f;
+}
+
+.check-icon {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+/* 商品图片 */
+.product-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 12rpx;
+  margin-right: 20rpx;
+}
+
+/* 商品信息 */
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 120rpx;
+  justify-content: space-between;
+}
+
+.product-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 10rpx;
+}
+
+/* 商品底部信息 */
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 价格 */
+.price-container {
+  display: flex;
+  align-items: baseline;
+}
+
+.price-symbol {
+  font-size: 24rpx;
+  color: #ff4757;
+}
+
+.price-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ff4757;
+  margin-left: 4rpx;
+}
+
+/* 数量控制 */
+.quantity-control {
+  display: flex;
+  align-items: center;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.quantity-btn {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #333;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.quantity-btn:active {
+  background: #f0f0f0;
+}
+
+.quantity-btn.disabled {
+  color: #ccc;
+  background: #f5f5f5;
+}
+
+.quantity-text {
+  min-width: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  border-left: 1rpx solid #e0e0e0;
+  border-right: 1rpx solid #e0e0e0;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+/* 空购物车状态 */
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 150rpx 30rpx;
+}
+
+.empty-image {
+  width: 240rpx;
+  height: 240rpx;
+  margin-bottom: 40rpx;
+  opacity: 0.6;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 15rpx;
+}
+
+.empty-desc {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}
+
+.go-shopping-btn {
+  background: linear-gradient(135deg, #3cc51f, #2aa317);
+  color: white;
+  padding: 20rpx 60rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+.btn-text {
+  color: white;
+}
+
+/* 底部结算栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 20rpx 30rpx;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+/* 左侧全选 */
+.select-all-container {
+  display: flex;
+  align-items: center;
+}
+
+.select-all-text {
+  font-size: 28rpx;
+  color: #333;
+  margin-left: 15rpx;
+}
+
+/* 右侧结算区域 */
+.settlement-container {
+  display: flex;
+  align-items: center;
+  gap: 30rpx;
+}
+
+.total-container {
+  display: flex;
+  align-items: baseline;
+}
+
+.total-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.total-symbol {
+  font-size: 24rpx;
+  color: #ff4757;
+  margin-left: 10rpx;
+}
+
+.total-price {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ff4757;
+}
+
+.settlement-btn {
+  background: linear-gradient(135deg, #3cc51f, #2aa317);
+  color: white;
+  padding: 20rpx 40rpx;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.settlement-btn:active {
+  transform: scale(0.98);
+}
+
+.settlement-btn.disabled {
+  background: #ccc;
+}
+
+.settlement-text {
+  color: white;
+}

@@ -1,0 +1,84 @@
+<view class="container">
+  <!-- 导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-title">青春助农</view>
+    <view class="nav-subtitle">特色农产品直供平台</view>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-section">
+    <view class="search-box">
+      <icon class="search-icon" type="search" size="16" color="#999"></icon>
+      <input 
+        class="search-input" 
+        placeholder="搜索茶叶、水果、特产..." 
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+        confirm-type="search"
+      />
+      <view class="search-clear" wx:if="{{searchKeyword}}" bindtap="clearSearch">
+        <icon type="clear" size="14" color="#999"></icon>
+      </view>
+    </view>
+  </view>
+
+  <!-- 轮播图 -->
+  <view class="banner-section">
+    <swiper class="banner-swiper" indicator-dots="{{true}}" autoplay="{{true}}" circular="{{true}}" interval="4000">
+      <swiper-item wx:for="{{bannerList}}" wx:key="id">
+        <view class="banner-item">
+          <image src="{{item.image}}" class="banner-image" mode="aspectFill"></image>
+          <view class="banner-overlay">
+            <text class="banner-title">{{item.title}}</text>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 商品分类导航 -->
+  <view class="category-nav">
+    <view class="category-item" wx:for="{{categoryList}}" wx:key="id" bindtap="onCategoryTap" data-category="{{item.name}}">
+      <text class="category-icon">{{item.icon}}</text>
+      <text class="category-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 推荐商品标题 -->
+  <view class="section-title">
+    <text class="title-text">{{searchKeyword ? '搜索结果' : '特色农产品'}}</text>
+    <text class="title-desc">{{searchKeyword ? '为您找到相关商品' : '地标产品·原产地直供'}}</text>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="product-grid" wx:if="{{filteredProductList.length > 0}}">
+    <view class="product-item" wx:for="{{filteredProductList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="product-image-container">
+        <image src="{{item.image}}" class="product-image" mode="aspectFill"></image>
+        <view class="product-tag">{{item.tag}}</view>
+      </view>
+      <view class="product-info">
+        <text class="product-name">{{item.name}}</text>
+        <text class="product-desc">{{item.description}}</text>
+        <view class="product-bottom">
+          <view class="price-container">
+            <text class="price-symbol">¥</text>
+            <text class="price-main">{{item.price}}</text>
+            <text class="price-unit">/{{item.unit}}</text>
+          </view>
+          <view class="buy-button" bindtap="addToCart" data-id="{{item.id}}">
+            <text class="buy-text">购买</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{filteredProductList.length === 0 && searchKeyword}}">
+    <image src="/images/empty.png" class="empty-image"></image>
+    <text class="empty-text">未找到相关商品</text>
+    <text class="empty-desc">试试搜索其他关键词吧</text>
+  </view>
+</view>

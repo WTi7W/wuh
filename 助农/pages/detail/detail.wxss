@@ -1,0 +1,536 @@
+.container {
+  background-color: #f5f5f5;
+  padding-bottom: 120rpx;
+}
+
+/* 商品图片轮播 */
+.product-gallery {
+  background: white;
+}
+
+.gallery-swiper {
+  height: 600rpx;
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 商品基本信息 */
+.product-info {
+  background: white;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.product-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.product-tags {
+  display: flex;
+  gap: 10rpx;
+}
+
+.tag {
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+}
+
+.tag.primary {
+  background: #3cc51f;
+  color: white;
+}
+
+.tag.secondary {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.price-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20rpx;
+}
+
+.price-main {
+  display: flex;
+  align-items: baseline;
+}
+
+.price-symbol {
+  font-size: 28rpx;
+  color: #ff4757;
+}
+
+.price-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ff4757;
+  margin: 0 8rpx;
+}
+
+.price-unit {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.price-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.product-desc {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 产地信息 */
+.origin-info {
+  background: white;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.title-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 10rpx;
+}
+
+.title-text {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.origin-content {
+  padding-left: 46rpx;
+}
+
+.origin-item {
+  display: flex;
+  margin-bottom: 15rpx;
+}
+
+.origin-label {
+  font-size: 28rpx;
+  color: #666;
+  width: 140rpx;
+}
+
+.origin-value {
+  font-size: 28rpx;
+  color: #333;
+  flex: 1;
+}
+
+/* 乡村振兴故事 */
+.story-section {
+  background: white;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.story-cover {
+  position: relative;
+  height: 400rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-bottom: 30rpx;
+}
+
+.story-image {
+  width: 100%;
+  height: 100%;
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20rpx 30rpx;
+  border-radius: 50rpx;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.play-icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.play-text {
+  color: white;
+  font-size: 24rpx;
+}
+
+.farmer-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+}
+
+.farmer-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.farmer-details {
+  flex: 1;
+}
+
+.farmer-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.farmer-title {
+  font-size: 24rpx;
+  color: #3cc51f;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.farmer-experience {
+  font-size: 22rpx;
+  color: #666;
+}
+
+.story-content {
+  padding-left: 46rpx;
+}
+
+.story-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.story-text {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+  display: block;
+  margin-bottom: 30rpx;
+}
+
+.achievements {
+  display: flex;
+  gap: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.achievement-item {
+  text-align: center;
+  flex: 1;
+}
+
+.achievement-number {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #3cc51f;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.achievement-label {
+  font-size: 22rpx;
+  color: #666;
+}
+
+.more-stories {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  margin-top: 20rpx;
+}
+
+.more-text {
+  font-size: 26rpx;
+  color: #3cc51f;
+  margin-right: 10rpx;
+}
+
+.more-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+/* 规格选择 */
+.spec-section {
+  background: white;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.spec-options {
+  display: flex;
+  gap: 20rpx;
+  flex-wrap: wrap;
+  padding-left: 46rpx;
+}
+
+.spec-item {
+  padding: 20rpx 30rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 150rpx;
+  transition: all 0.3s ease;
+}
+
+.spec-item.selected {
+  border-color: #3cc51f;
+  background: #f0f9f0;
+}
+
+.spec-name {
+  font-size: 26rpx;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.spec-price {
+  font-size: 24rpx;
+  color: #ff4757;
+  font-weight: bold;
+}
+
+/* 数量选择 */
+.quantity-section {
+  background: white;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  padding-left: 46rpx;
+}
+
+.quantity-btn {
+  width: 60rpx;
+  height: 60rpx;
+  border: 2rpx solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #333;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.quantity-btn:first-child {
+  border-radius: 16rpx 0 0 16rpx;
+}
+
+.quantity-btn:last-child {
+  border-radius: 0 16rpx 16rpx 0;
+}
+
+.quantity-btn.disabled {
+  color: #ccc;
+  background: #f5f5f5;
+}
+
+.quantity-input {
+  width: 120rpx;
+  height: 60rpx;
+  border: 2rpx solid #e0e0e0;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+/* 商品详情图 */
+.detail-images {
+  background: white;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.detail-image {
+  width: 100%;
+  margin-bottom: 20rpx;
+  border-radius: 16rpx;
+}
+
+/* 底部操作栏 */
+.bottom-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 20rpx 30rpx;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  z-index: 100;
+}
+
+.action-left {
+  display: flex;
+  gap: 40rpx;
+  margin-right: 30rpx;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.action-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-bottom: 8rpx;
+}
+
+.action-text {
+  font-size: 20rpx;
+  color: #666;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5rpx;
+  right: -5rpx;
+  background: #ff4757;
+  color: white;
+  font-size: 18rpx;
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-right {
+  flex: 1;
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn-add-cart, .btn-buy-now {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-add-cart {
+  background: linear-gradient(135deg, #ffa726, #ff8f00);
+  color: white;
+}
+
+.btn-buy-now {
+  background: linear-gradient(135deg, #3cc51f, #2aa317);
+  color: white;
+}
+
+.btn-add-cart:active, .btn-buy-now:active {
+  transform: scale(0.98);
+}
+
+/* 视频弹窗 */
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.video-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-container {
+  position: relative;
+  width: 90%;
+  max-width: 600rpx;
+}
+
+.story-video {
+  width: 100%;
+  height: 400rpx;
+  border-radius: 16rpx;
+}
+
+.close-btn {
+  position: absolute;
+  top: -60rpx;
+  right: 0;
+  width: 60rpx;
+  height: 60rpx;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-icon {
+  width: 40rpx;
+  height: 40rpx;
+}

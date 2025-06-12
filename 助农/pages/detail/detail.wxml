@@ -1,0 +1,189 @@
+<view class="container">
+  <!-- 商品图片轮播 -->
+  <view class="product-gallery">
+    <swiper class="gallery-swiper" indicator-dots="{{true}}" autoplay="{{false}}" circular="{{true}}">
+      <swiper-item wx:for="{{productImages}}" wx:key="index">
+        <image src="{{item}}" class="gallery-image" mode="aspectFill"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 商品基本信息 -->
+  <view class="product-info">
+    <view class="product-header">
+      <text class="product-name">{{productDetail.name}}</text>
+      <view class="product-tags">
+        <text class="tag primary">{{productDetail.tag}}</text>
+        <text class="tag secondary">现货</text>
+      </view>
+    </view>
+    
+    <view class="price-section">
+      <view class="price-main">
+        <text class="price-symbol">¥</text>
+        <text class="price-value">{{productDetail.price}}</text>
+        <text class="price-unit">/{{productDetail.unit}}</text>
+      </view>
+      <view class="price-desc">已售{{soldCount}}件</view>
+    </view>
+
+    <text class="product-desc">{{productDetail.description}}</text>
+  </view>
+
+  <!-- 产地信息 -->
+  <view class="origin-info">
+    <view class="section-title">
+      <image src="/images/icon-origin.png" class="title-icon"></image>
+      <text class="title-text">产地信息</text>
+    </view>
+    <view class="origin-content">
+      <view class="origin-item">
+        <text class="origin-label">产地：</text>
+        <text class="origin-value">{{productDetail.origin}}</text>
+      </view>
+      <view class="origin-item">
+        <text class="origin-label">采摘时间：</text>
+        <text class="origin-value">{{productDetail.harvestTime}}</text>
+      </view>
+      <view class="origin-item">
+        <text class="origin-label">保质期：</text>
+        <text class="origin-value">{{productDetail.shelfLife}}</text>
+      </view>
+      <view class="origin-item">
+        <text class="origin-label">储存方式：</text>
+        <text class="origin-value">{{productDetail.storage}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 乡村振兴故事 -->
+  <view class="story-section">
+    <view class="section-title">
+      <image src="/images/icon-story.png" class="title-icon"></image>
+      <text class="title-text">乡村振兴故事</text>
+    </view>
+    
+    <!-- 故事封面 -->
+    <view class="story-cover" bindtap="playStoryVideo">
+      <image src="{{storyInfo.coverImage}}" class="story-image" mode="aspectFill"></image>
+      <view class="play-button">
+        <image src="/images/icon-play.png" class="play-icon"></image>
+        <text class="play-text">观看故事视频</text>
+      </view>
+    </view>
+
+    <!-- 农民信息 -->
+    <view class="farmer-info">
+      <image src="{{storyInfo.farmerAvatar}}" class="farmer-avatar"></image>
+      <view class="farmer-details">
+        <text class="farmer-name">{{storyInfo.farmerName}}</text>
+        <text class="farmer-title">{{storyInfo.farmerTitle}}</text>
+        <text class="farmer-experience">从业{{storyInfo.experience}}年</text>
+      </view>
+    </view>
+
+    <!-- 故事内容 -->
+    <view class="story-content">
+      <text class="story-title">{{storyInfo.title}}</text>
+      <text class="story-text">{{storyInfo.content}}</text>
+      
+      <!-- 成就展示 -->
+      <view class="achievements">
+        <view class="achievement-item" wx:for="{{storyInfo.achievements}}" wx:key="index">
+          <text class="achievement-number">{{item.number}}</text>
+          <text class="achievement-label">{{item.label}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 更多故事 -->
+    <view class="more-stories" bindtap="viewMoreStories">
+      <text class="more-text">查看更多乡村振兴故事</text>
+      <image src="/images/icon-arrow.png" class="more-icon"></image>
+    </view>
+  </view>
+
+  <!-- 规格选择 -->
+  <view class="spec-section">
+    <view class="section-title">
+      <image src="/images/icon-spec.png" class="title-icon"></image>
+      <text class="title-text">规格选择</text>
+    </view>
+    <view class="spec-options">
+      <view 
+        class="spec-item {{selectedSpec === item.id ? 'selected' : ''}}" 
+        wx:for="{{specList}}" 
+        wx:key="id"
+        bindtap="selectSpec"
+        data-id="{{item.id}}"
+      >
+        <text class="spec-name">{{item.name}}</text>
+        <text class="spec-price">¥{{item.price}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数量选择 -->
+  <view class="quantity-section">
+    <view class="section-title">
+      <image src="/images/icon-quantity.png" class="title-icon"></image>
+      <text class="title-text">购买数量</text>
+    </view>
+    <view class="quantity-control">
+      <view class="quantity-btn {{quantity <= 1 ? 'disabled' : ''}}" bindtap="decreaseQuantity">-</view>
+      <input class="quantity-input" type="number" value="{{quantity}}" bindinput="inputQuantity"></input>
+      <view class="quantity-btn" bindtap="increaseQuantity">+</view>
+    </view>
+  </view>
+
+  <!-- 商品详情图 -->
+  <view class="detail-images">
+    <view class="section-title">
+      <image src="/images/icon-detail.png" class="title-icon"></image>
+      <text class="title-text">商品详情</text>
+    </view>
+    <image 
+      src="{{item}}" 
+      class="detail-image" 
+      mode="widthFix"
+      wx:for="{{detailImages}}" 
+      wx:key="index"
+    ></image>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-actions">
+    <view class="action-left">
+      <view class="action-item" bindtap="goToCart">
+        <image src="/images/cart-icon.png" class="action-icon"></image>
+        <text class="action-text">购物车</text>
+        <view class="cart-badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
+      </view>
+      <view class="action-item" bindtap="toggleFavorite">
+        <image src="{{isFavorite ? '/images/favorite-selected.png' : '/images/favorite.png'}}" class="action-icon"></image>
+        <text class="action-text">{{isFavorite ? '已收藏' : '收藏'}}</text>
+      </view>
+    </view>
+    <view class="action-right">
+      <view class="btn-add-cart" bindtap="addToCart">加入购物车</view>
+      <view class="btn-buy-now" bindtap="buyNow">立即购买</view>
+    </view>
+  </view>
+</view>
+
+<!-- 视频播放弹窗 -->
+<view class="video-modal {{showVideoModal ? 'show' : ''}}" bindtap="closeVideoModal">
+  <view class="video-container" catchtap="preventClose">
+    <video 
+      wx:if="{{showVideoModal}}"
+      src="{{storyInfo.videoUrl}}" 
+      class="story-video"
+      autoplay="{{true}}"
+      controls="{{true}}"
+      poster="{{storyInfo.coverImage}}"
+    ></video>
+    <view class="close-btn" bindtap="closeVideoModal">
+      <image src="/images/icon-close.png" class="close-icon"></image>
+    </view>
+  </view>
+</view>
