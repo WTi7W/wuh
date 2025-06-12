@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/cart/cart",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/login/login"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

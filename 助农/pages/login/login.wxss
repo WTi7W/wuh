@@ -1,0 +1,5 @@
+.container { padding: 40rpx; }
+.form { display: flex; flex-direction: column; gap: 30rpx; }
+input { border: 1px solid #eee; padding: 20rpx; border-radius: 8rpx; }
+button { background: #3cc51f; color: #fff; border: none; border-radius: 8rpx; }
+.switch-text { color: #3cc51f; margin-top: 20rpx; text-align: center; }

@@ -1,8 +1,9 @@
 Page({
   data: {
-    searchKeyword: '', // 搜索关键词
-    
-    // 轮播图数据 - 助农主题海报
+    // 搜索关键词
+    searchKeyword: '',
+
+    // 轮播图数据
     bannerList: [
       {
         id: 1,
@@ -30,8 +31,8 @@ Page({
         image: 'https://x0.ifengimg.com/res/2022/4F1FDC7BB8F54460E12DB335374E8F88FD66E7BC_size548_w600_h450.png'
       }
     ],
-    
-    // 分类导航数据 - 使用emoji图标
+
+    // 分类导航
     categoryList: [
       {
         id: 1,
@@ -55,7 +56,7 @@ Page({
       }
     ],
 
-    // 特色农产品列表
+    // 商品数据
     productList: [
       {
         id: 1,
@@ -118,44 +119,31 @@ Page({
         image: 'https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/122799/37/28818/191658/637db045Efffa70a6/9b954f201a051353.jpg'
       }
     ],
-    
-    // 过滤后的商品列表
-    filteredProductList: []
+
+    // 分页和筛选相关
+    filteredProductList: [],
+    page: 1,
+    pageSize: 4, // 每页显示4个
+    hasMore: true,
+    loading: false
   },
 
-  onLoad: function (options) {
-    console.log('首页加载完成');
-    this.setData({
-      filteredProductList: this.data.productList
-    });
+  onLoad() {
+    this.setData({ page: 1 });
+    this.filterProducts(true);
   },
 
-  onShow: function () {
-    // 页面显示时刷新数据
-    this.loadProductList();
+  // 搜索输入
+  onSearchInput(e) {
+    this.setData({ searchKeyword: e.detail.value });
+    this.filterProducts(true);
   },
 
-  // 加载商品列表
-  loadProductList: function() {
-    console.log('加载商品列表');
-    this.filterProducts();
-  },
+  // 搜索确认
+  onSearchConfirm(e) {
+    this.setData({ searchKeyword: e.detail.value });
+    this.filterProducts(true);
 
-  // 搜索输入事件
-  onSearchInput: function(e) {
-    this.setData({
-      searchKeyword: e.detail.value
-    });
-    this.filterProducts();
-  },
-
-  // 搜索确认事件
-  onSearchConfirm: function(e) {
-    this.setData({
-      searchKeyword: e.detail.value
-    });
-    this.filterProducts();
-    
     if (e.detail.value.trim()) {
       wx.showToast({
         title: `搜索"${e.detail.value}"`,
@@ -165,142 +153,111 @@ Page({
   },
 
   // 清除搜索
-  clearSearch: function() {
-    this.setData({
-      searchKeyword: ''
-    });
-    this.filterProducts();
+  clearSearch() {
+    this.setData({ searchKeyword: '' });
+    this.filterProducts(true);
   },
 
-  // 分类点击事件
-  onCategoryTap: function(e) {
+  // 分类点击
+  onCategoryTap(e) {
     const category = e.currentTarget.dataset.category;
-    this.setData({
-      searchKeyword: category
-    });
-    this.filterProducts();
+    this.setData({ searchKeyword: category });
+    this.filterProducts(true);
   },
 
-  // 过滤商品
-  filterProducts: function() {
-    const keyword = this.data.searchKeyword.toLowerCase();
-    
-    if (!keyword) {
-      this.setData({
-        filteredProductList: this.data.productList
-      });
-      return;
+  // 下拉刷新
+  onPullDownRefresh() {
+    this.setData({ page: 1 });
+    this.filterProducts(true, () => {
+      wx.stopPullDownRefresh();
+      wx.showToast({ title: '刷新成功', icon: 'success' });
+    });
+  },
+
+  // 上拉加载更多
+  onReachBottom() {
+    if (this.data.hasMore && !this.data.loading) {
+      this.filterProducts(false);
     }
-    
-    const filtered = this.data.productList.filter(product => {
-      return product.name.toLowerCase().includes(keyword) ||
-             product.description.toLowerCase().includes(keyword) ||
-             product.category.toLowerCase().includes(keyword) ||
-             product.tag.toLowerCase().includes(keyword);
-    });
-    
+  },
+
+  // 过滤商品并分页
+  filterProducts(refresh = false, cb) {
+    let { productList, searchKeyword, page, pageSize } = this.data;
+    if (refresh) page = 1;
+
+    let filtered = productList;
+    if (searchKeyword) {
+      const keyword = searchKeyword.toLowerCase();
+      filtered = productList.filter(product =>
+        product.name.toLowerCase().includes(keyword) ||
+        product.description.toLowerCase().includes(keyword) ||
+        product.category.toLowerCase().includes(keyword) ||
+        product.tag.toLowerCase().includes(keyword)
+      );
+    }
+
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+    const pageList = filtered.slice(start, end);
+    const newList = refresh ? pageList : this.data.filteredProductList.concat(pageList);
+
     this.setData({
-      filteredProductList: filtered
+      filteredProductList: newList,
+      page: page + 1,
+      hasMore: end < filtered.length,
+      loading: false
     });
+
+    if (typeof cb === 'function') cb();
   },
 
   // 跳转到商品详情页
-  goToDetail: function(e) {
+  goToDetail(e) {
     const productId = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: `/pages/detail/detail?id=${productId}`,
-      success: function() {
-        console.log('跳转到商品详情页，商品ID:', productId);
-      },
-      fail: function(err) {
-        console.error('跳转失败:', err);
-        wx.showToast({
-          title: '跳转失败',
-          icon: 'error'
-        });
-      }
+      url: `/pages/detail/detail?id=${productId}`
     });
   },
 
   // 添加到购物车
-  addToCart: function(e) {
-    // 阻止事件冒泡，防止触发商品详情跳转
+  addToCart(e) {
     e.stopPropagation();
-    
     const productId = e.currentTarget.dataset.id;
     const product = this.data.productList.find(item => item.id === productId);
-    
+
     if (!product) {
-      wx.showToast({
-        title: '商品不存在',
-        icon: 'error'
-      });
+      wx.showToast({ title: '商品不存在', icon: 'error' });
       return;
     }
 
-    // 获取本地存储的购物车数据
     let cartList = wx.getStorageSync('cartList') || [];
-    
-    // 检查商品是否已在购物车中
     const existingItem = cartList.find(item => item.id === productId);
-    
+
     if (existingItem) {
-      // 如果商品已存在，数量加1
       existingItem.quantity += 1;
     } else {
-      // 如果商品不存在，添加到购物车
-      cartList.push({
-        ...product,
-        quantity: 1,
-        selected: true
-      });
+      cartList.push({ ...product, quantity: 1, selected: true });
     }
-    
-    // 保存到本地存储
     wx.setStorageSync('cartList', cartList);
-    
-    // 显示成功提示
-    wx.showToast({
-      title: '已加入购物车',
-      icon: 'success',
-      duration: 1500
-    });
-    
-    // 询问是否立即前往购物车
+
+    wx.showToast({ title: '已加入购物车', icon: 'success', duration: 1200 });
+
     setTimeout(() => {
       wx.showModal({
         title: '提示',
         content: '商品已加入购物车，是否立即查看？',
         success: (res) => {
           if (res.confirm) {
-            wx.switchTab({
-              url: '/pages/cart/cart'
-            });
+            wx.switchTab({ url: '/pages/cart/cart' });
           }
         }
       });
-    }, 1500);
-    
-    console.log('商品已添加到购物车:', product.name);
-  },
-
-  // 下拉刷新
-  onPullDownRefresh: function() {
-    console.log('下拉刷新');
-    
-    // 模拟刷新数据
-    setTimeout(() => {
-      this.loadProductList();
-      wx.stopPullDownRefresh();
-      wx.showToast({
-        title: '刷新成功',
-        icon: 'success'
-      });
-    }, 1000);
+    }, 1200);
   },
 
   // 分享
-  onShareAppMessage: function() {
+  onShareAppMessage() {
     return {
       title: '青春助农 - 特色农产品直供',
       path: '/pages/index/index',
